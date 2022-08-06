@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: bvn-service
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: bvnDB
+      auto-index-creation: true
+
+
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
