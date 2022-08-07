@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/bv-service/svalidate/wrapper")
+@RequestMapping("/bv-service")
 public class BvnController {
 
     private final BvnService bvnService;
@@ -21,7 +21,7 @@ public class BvnController {
         this.bvnService = bvnService;
     }
 
-    @PostMapping
+    @PostMapping("/svalidate/wrapper")
     ResponseEntity<BvnResponse> validate(@RequestBody BvnRequest request){
         return ResponseEntity.ok(bvnService.validate(request));
     }

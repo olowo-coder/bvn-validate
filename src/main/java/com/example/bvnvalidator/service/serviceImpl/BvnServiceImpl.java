@@ -49,7 +49,7 @@ public class BvnServiceImpl implements BvnService {
         }else if(request.getBvn().length() != 11){
             response = BvnResponse.builder().code(ResponseCode.BVN_LESS_THAN.getCode())
                     .message(ResponseCode.BVN_LESS_THAN.getMessage()).build();
-        } else if(!request.getBvn().matches("\\d{11}")){
+        } else if(request.getBvn().length() == 11 && !request.getBvn().matches("\\d{11}")){
             response = BvnResponse.builder().code(ResponseCode.NON_DIGIT_BVN.getCode())
                     .message(ResponseCode.NON_DIGIT_BVN.getMessage()).build();
         } else if(!mockDb.containsKey(request.getBvn())){
@@ -59,7 +59,7 @@ public class BvnServiceImpl implements BvnService {
             response = BvnResponse.builder().code(ResponseCode.SUCCESS.getCode())
                     .message(ResponseCode.SUCCESS.getMessage())
                     .imageDetail(Base64.getEncoder().encodeToString(mockDb.get(request.getBvn()).getImageDetail().getBytes()))
-                    .basicDetail(mockDb.get(request.getBvn()).getBasicDetail()).build();
+                    .basicDetail(Base64.getEncoder().encodeToString(mockDb.get(request.getBvn()).getBasicDetail().getBytes())).build();
         }
         logsReqRes(request, response);
         return response;
